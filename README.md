@@ -39,23 +39,31 @@ Before storing data into the database, you need to clean the dataset to a certai
 Then, you are good to go with the database.  
 
 ### Installation of MongoDB  
-1. For this project, we selected MongoDB Community Server to store and manage the database on local environment. You should download the installer on https://www.mongodb.com/try/download/community
+1. For this project, we selected MongoDB Community Server to store and manage the database on local environment. You can search 'mongodb community server' and click the first result.
+
+<img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/search1.png>
+
+2. Click 'select package' to select the installer that suits your environment. We used Windows x64 for the demonstration.
+
+<img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/download1.png>
+
+3. You can also visit https://www.mongodb.com/try/download/community
 
 <img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/install1.png>
 
-2. Execute the installer, you should choose the complete installation option and install the MongoDB Compass (which will be used in the next phase) as well.
+4. Execute the installer, you should choose the complete installation option and install the MongoDB Compass (which will be used in the next phase) as well.
 
 <img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/install2.png>
    
-3. Install Mongod as a service and custom your direcory setting (recommend using the default direcory to avoid errors)
+5. Install Mongod as a service and custom your direcory setting (recommend using the default direcory to avoid errors)
 
 <img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/install3.png>
 
-4. Install and open the MongoDB Compass
+6. Install and open the MongoDB Compass
 
 <img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/newCompass1.png>
 
-5. Click 'New connection' on the left and the interface will automatically generate a connection string for you. Click 'Connect' to connect to your localhost. You can also click 'Save & Connect' to save your connection information.
+7. Click 'New connection' on the left and the interface will automatically generate a connection string for you. Click 'Connect' to connect to your localhost. You can also click 'Save & Connect' to save your connection information.
 
 <img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/newCompass2.png>
 
