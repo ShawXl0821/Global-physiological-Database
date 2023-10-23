@@ -23,6 +23,9 @@ This is a guidance for general users to deploy the MongoDB database locally and 
     -   [Add index for a collection](#add-index-for-a-collection)
     -   [Add validation rules for a collection](#add-validation-rules-for-a-collection)
     -   [Trigger](#trigger)    
+-   [Local connection](#local-connection)
+
+<br>
 
 ## Database structure
 The database structure designed by us divided the large dataset into four parts: data (storing most of the experimental data), participant (contain information of the participants of experiments), experiment (include the information of different experiments) and trial (information of each trial of the experiment). 
@@ -344,4 +347,9 @@ Unfortunately, MongoDB only supports trigger function on Atlas cloud server. So,
 
 #### Notes
 You can edit the js script by yourself to add more functions such as deleting invalid data. However, this "trigger script" requires you to run this script each time you want to validate your dataset.
+
+<br>
+
+## Local connection
+MongoDB Community Server supports connection to another device's database under the same LAN. You can even use VPN to fulfill remote connection. Here is the 
 
