@@ -174,6 +174,7 @@ The exported file looks like this:
 You can use the filter or aggregation pipeline to query the data you want  
 For detailed filter guidance, please visit https://www.mongodb.com/docs/compass/current/query/filter/  
 For detailed aggregation guidance, please visit https://www.mongodb.com/docs/manual/aggregation/
+For example query, please visit https://github.com/ShawXl0821/Global-physiological-Database/tree/main/Aggregation%20pipeline%20example
 
 1. filter on the Compass
 Edit directly in the filter field, then click 'find'. In this case, I returned the participants over 20.
