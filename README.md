@@ -19,12 +19,14 @@ This is a guidance for general users to deploy the MongoDB database locally and 
     -   [Modify data](#modify-data-in-the-collection)
     -   [Export data](#export-data)
     -   [Query data](#query-data)
+    -   [Work with Python](#work-with-python)
 -   [Advanced Configuration](#advanced-configuration)
     -   [Add index for a collection](#add-index-for-a-collection)
     -   [Add validation rules for a collection](#add-validation-rules-for-a-collection)
     -   [Trigger](#trigger)    
 -   [Data transfer](#data-transfer)
     -   [Prerequisite](#prerequisite)
+    -   [Instruction](#instruction)
 
 <br>
 
@@ -251,6 +253,114 @@ The result looks like this:
 
 <br>
 
+### Work with Python
+You can also write Python scripts to manipulate with your data.
+
+#### Connect to the MongoDB client
+```
+from pymongo import MongoClient
+
+# Connect to the database
+client = MongoClient("mongodb://localhost:27017")
+```
+<br>
+
+#### Insert data from csv files
+After connecting to the MongoDB client, you can insert data from csv into the database. Here's how you can do this (details in the : 
+```
+# extract data from csv
+csv_file = "D:\COMP5703\Study 1 - Rugby League\CBR_02_E1C_Tre.csv"  # replace the path with your own
+data = pd.read_csv(csv_file)
+
+# trun csv file into a dictionary 
+data_dict = data.to_dict(orient="records")
+
+# insert data into collection
+collection.insert_many(data_dict)
+
+```
+You can also insert data line by line, but it is not recommended for large dataset
+```
+# Insert data of csv file line by line
+with open(csv_file, "r") as file:
+    lines = file.readlines()
+    headers = lines[0].strip().split(",")
+    
+    for line in lines[1:]:
+        data = line.strip().split(",")
+        doc = {}
+        for i in range(len(headers)):
+            doc[headers[i]] = data[i]
+        collection.insert_one(doc)
+```  
+Then you can check if it works in MongoDB Compass:
+<img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/python1.png>
+
+<br>
+
+Of course, the data is hard to read because the CSV has not been cleaned yet. To learn about how we cleanded the dataset, please visit https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Data/Instruction.md
+
+<br>
+
+#### Query data with Python
+You can also query data with Python as we did in the 'Query data' part using the following script (Details in the .
+```
+pipeline = [   
+    {
+        '$project': {
+            'fields': {
+                '$objectToArray': '$$ROOT'
+            }
+        }
+    }, {
+        '$unwind': {
+            'path': '$fields'
+        }
+    }, {
+        '$match': {
+            'fields.k': {
+                '$ne': '_id'
+            }
+        }
+    }, {
+        '$group': {
+            '_id': None, 
+            'keys': {
+                '$addToSet': '$fields.k'
+            }
+        }
+    }, {
+        '$project': {
+            '_id': 0, 
+            'keys': 1
+        }
+    }
+
+]
+
+# execute the pipeline
+result = list(collection.aggregate(pipeline))
+
+# print the result
+print(result)
+
+```
+The results will be printed in the terminal: 
+<img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/python2.png>
+
+<br>
+
+Tips: You can easily get the Python version of pipeline from MongoDB Compass by following procedures:  
+1. Click into 'Aggregations' page and select one of your queries:
+<img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/python3.png>
+
+2. Click 'EXPORT TO LANGUAGE' and select 'Python'
+<img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/python4.png>
+
+You now have the Python version of pipeline query.
+
+<br>
+
 ## Advanced configuration 
 
 ### Add index for a collection
@@ -357,11 +467,35 @@ You can use a tool 'mongodump' from MongoDB Community Serverthat can extract dat
 <br>
 
 ### Prerequisite 
-Make sure you have installed MongoDB Command Line Database Tools. If not, you can just google 'MongoDB Command Line Database Tools download' and click into the first item, or visit https://www.mongodb.com/try/download/database-tools
+1. Make sure you have installed MongoDB Command Line Database Tools. If not, you can just google 'MongoDB Command Line Database Tools download' and click into the first item, or visit https://www.mongodb.com/try/download/database-tools
 
 <img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/tool0.png>
    
 <img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/tool1.png>
 
+<br>
+
+2. Make sure your MongoDB service is running
+
+<br>
+
 ### Instruction
 1. Direct to the folder where you installed your MongoDB Command Line tools, enter 'cmd' to enter the Command Prompt.
+
+<img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/transfer0.png>
+
+2. Run the following command to dump your data from your database into BSON files to the folder
+
+```
+mongodump --db <Your database name> --out <folder where you want to dump your data to>
+```
+<img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/transfer1.png>
+
+4. To restore your data, run the command:
+```
+mongorestore --db <your database name> <the path of the folder that contains data>
+```
+<img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/restore2.png>
+
+6. Now you can see the data transferred on your server
+<img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/transfer2.png>
