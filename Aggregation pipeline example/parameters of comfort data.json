@@ -1,0 +1,20 @@
+[{
+  "keys": [
+    "Timestamp",
+    "Participant_ID",
+    "Temperature_Calf",
+    "Temperature_Chest",
+    "Temperature_Forehead",
+    "Temperature_Thigh",
+    "Temperature_Deltoid",
+    "Temperature_Scapula",
+    "Temperature_Hand",
+    "HR (bpm)",
+    "Temperature_Shoulder",
+    "Temperature_Tympanic",
+    "Trial_ID",
+    "Temperature_Tricep",
+    "Temperature_Trec",
+    "Temperature_Rectal"
+  ]
+}]
