@@ -23,7 +23,8 @@ This is a guidance for general users to deploy the MongoDB database locally and 
     -   [Add index for a collection](#add-index-for-a-collection)
     -   [Add validation rules for a collection](#add-validation-rules-for-a-collection)
     -   [Trigger](#trigger)    
--   [Local connection](#local-connection)
+-   [Data transfer](#data-transfer)
+    -   [Prerequisite](#prerequisite)
 
 <br>
 
@@ -350,6 +351,17 @@ You can edit the js script by yourself to add more functions such as deleting in
 
 <br>
 
-## Local connection
-MongoDB Community Server supports connection to another device's database under the same LAN. You can even use VPN to fulfill remote connection. Here is the 
+## Data transfer
+You can use a tool 'mongodump' from MongoDB Community Serverthat can extract data from the database into BSON files. Then it will be easy for you to send the copy of the data to someone else. Then, the receiver can use the tool 'mongorestore' to restore the data to his own MongoDB server. This enables the data transfer among multiple users.
 
+<br>
+
+### Prerequisite 
+Make sure you have installed MongoDB Command Line Database Tools. If not, you can just google 'MongoDB Command Line Database Tools download' and click into the first item, or visit https://www.mongodb.com/try/download/database-tools
+
+<img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/tool0.png>
+   
+<img src=https://github.com/ShawXl0821/Global-physiological-Database/blob/main/Asset/tool1.png>
+
+### Instruction
+1. Direct to the folder where you installed your MongoDB Command Line tools, enter 'cmd' to enter the Command Prompt.
