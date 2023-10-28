@@ -6,11 +6,11 @@ mongoose.connect('mongodb://localhost:27017/Project5703', {
 })
 .then(async () => {
   console.log('Connected to MongoDB');
-  await checkTrialCollection(); // 连接成功后立即运行检查
+  await checkTrialCollection(); // scan after connection
 })
 .catch(error => {
   console.error('Connection error:', error);
-  process.exit(1); // 退出并返回非零状态表示错误
+  process.exit(1); // exit
 });
 
 const Schema = mongoose.Schema;
@@ -39,7 +39,7 @@ const ExperimentSchema = new Schema({
   }
 });
 
-// 使用已存在的集合
+// use colleciton in the database
 const Experiment = mongoose.model('Experiment', ExperimentSchema, 'Experiment');
 
 // Trial Schema
@@ -59,10 +59,10 @@ const TrialSchema = new Schema({
     required: false,
     unique: false
   }
-  // ... 其他字段
+  
 });
 
-// 使用已存在的集合
+// use the collection
 const Trial = mongoose.model('Trial', TrialSchema, 'Trial');
 
 async function checkTrialCollection() {
@@ -78,5 +78,5 @@ async function checkTrialCollection() {
   }
 
   console.log('Trial collection check completed.');
-  process.exit(0); // 退出并返回状态码 0 表示成功
+  process.exit(0); // exit 
 }
