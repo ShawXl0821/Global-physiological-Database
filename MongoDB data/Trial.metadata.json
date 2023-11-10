@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"Trail_ID":{"$numberInt":"1"}},"name":"Trail_ID_1","unique":true}],"uuid":"31de3dbe42e8451995055797715cbc5b","collectionName":"Trial","type":"collection"}
